@@ -1,6 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:formz/formz.dart';
 import 'package:teslo_shop/features/shared/shared.dart';
+
+//! 3 - statenotifierProvider - consume afuera
+final loginFormProvider =
+    StateNotifierProvider.autoDispose<LoginFormNotifier, LoginFormState>((ref) {
+  return LoginFormNotifier();
+});
+
 //! state del provider
 
 class LoginFormState {
@@ -46,7 +53,7 @@ password: $password
   }
 }
 
-//! 2 - como implementar un notifier
+//! 2 - como implementar un notifierb
 class LoginFormNotifier extends StateNotifier<LoginFormState> {
   LoginFormNotifier() : super(LoginFormState());
 
@@ -82,9 +89,3 @@ class LoginFormNotifier extends StateNotifier<LoginFormState> {
         isValid: Formz.validate([email, password]));
   }
 }
-
-//! 3 - statenotifierProvider - consume afuera
-final loginFormProvider =
-    StateNotifierProvider.autoDispose<LoginFormNotifier, LoginFormState>((ref) {
-  return LoginFormNotifier();
-});
