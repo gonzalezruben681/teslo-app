@@ -17,7 +17,9 @@ class AuthNotifier extends StateNotifier<AuthState> {
   final KeyValueStorageService keyValueStorageService;
   AuthNotifier(
       {required this.keyValueStorageService, required this.authRepository})
-      : super(AuthState());
+      : super(AuthState()) {
+    checkAuthStatus();
+  }
 
   Future<void> loginUser(String email, String password) async {
     try {
