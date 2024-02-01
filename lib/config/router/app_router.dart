@@ -7,7 +7,6 @@ import 'package:teslo_shop/features/products/products.dart';
 import 'app_router_notifier.dart';
 
 final goRouterProvider = Provider((ref) {
-
   final goRouterNotifier = ref.read(goRouterNotifierProvider);
 
   return GoRouter(
@@ -42,26 +41,25 @@ final goRouterProvider = Provider((ref) {
         ),
       ),
     ],
-
     redirect: (context, state) {
-      
       final isGoingTo = state.subloc;
       final authStatus = goRouterNotifier.authStatus;
 
-      if ( isGoingTo == '/splash' && authStatus == AuthStatus.checking ) return null;
+      if (isGoingTo == '/splash' && authStatus == AuthStatus.checking) return null;
 
-      if ( authStatus == AuthStatus.notAuthenticated ) {
-        if ( isGoingTo == '/login' || isGoingTo == '/register' ) return null;
+      if (authStatus == AuthStatus.notAuthenticated) {
+        if (isGoingTo == '/login' || isGoingTo == '/register') return null;
 
         return '/login';
       }
 
-      if ( authStatus == AuthStatus.authenticated ) {
-        if ( isGoingTo == '/login' || isGoingTo == '/register' || isGoingTo == '/splash' ){
-           return '/';
+      if (authStatus == AuthStatus.authenticated) {
+        if (isGoingTo == '/login' ||
+            isGoingTo == '/register' ||
+            isGoingTo == '/splash') {
+          return '/';
         }
       }
-
 
       return null;
     },
